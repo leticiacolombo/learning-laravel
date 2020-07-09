@@ -1,0 +1,4 @@
+php artisan serve
+das start no servidor
+
+php artisan make:controller ConfigController
