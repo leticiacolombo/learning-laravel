@@ -58,6 +58,8 @@ Route::get('/user/{id}', function($id) {
 //Grupo de Rotas
 Route::prefix('/config')->group(function() {
     Route::get('/', 'Admin\ConfigController@index');
+    Route::post('/', 'Admin\ConfigController@index');
+
     Route::get('info', 'Admin\ConfigController@info');
     Route::get('permissoes', 'Admin\ConfigController@permissoes');
 });
