@@ -64,6 +64,20 @@ Route::prefix('/config')->group(function() {
     Route::get('permissoes', 'Admin\ConfigController@permissoes');
 });
 
+Route::prefix('/tarefas')->group(function() {
+    Route::get('/', 'TarefasController@list')->name('tarefas.list'); //Listagem de tarefas
+    
+    Route::get('add', 'TarefasController@add')->name('tarefas.add'); //Tela de adição de nova tarefa
+    Route::post('add', 'TarefasController@addAction'); //AÇÃO de adição de nova tarefa
+
+    Route::get('edit/{id}', 'TarefasController@edit')->name('tarefas.edit'); //Tela de edição de nova tarefa
+    Route::post('edit/{id}', 'TarefasController@editAction'); //AÇÃO de edição de nova tarefa
+
+    Route::get('delete/{id}', 'TarefasController@del')->name('tarefas.del'); //AÇÃO de deletar
+
+    Route::get('marcar/{id}', 'TarefasController@done')->name('tarefas.done'); //marcar resolvido ou não resolvido
+});
+
 Route::fallback(function() {
     return view('404');
 });
