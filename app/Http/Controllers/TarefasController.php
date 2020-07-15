@@ -18,7 +18,8 @@ class TarefasController extends Controller
     }
 
     public function addAction(Request $request) {
-        if ($request->filled('titulo')) {
+        //Jeito 1 de fazer
+        /*if ($request->filled('titulo')) {
             $title = $request->input('titulo');
 
             DB::insert('INSERT INTO tarefas (titulo) VALUES (:titulo)', [
@@ -30,7 +31,19 @@ class TarefasController extends Controller
             return redirect()
                 ->route('tarefas.add')
                 ->with('warning', 'Você não preencheu o título');
-        }
+        }*/
+
+        $request->validate([
+            'titulo' => [ 'required', 'string' ]
+        ]);
+
+        $title = $request->input('titulo');
+
+        DB::insert('INSERT INTO tarefas (titulo) VALUES (:titulo)', [
+            'titulo' => $title
+        ]);
+
+        return redirect()->route('tarefas.list');    
     }
 
     public function edit($id) {
@@ -48,24 +61,16 @@ class TarefasController extends Controller
     }
 
     public function editAction(Request $request, $id) {
-        if ($request->filled('titulo')) {
-            $data = DB::select('SELECT * FROM tarefas WHERE id = :id', [
-                'id' => $id
-            ]);
-    
-            if (count($data) > 0) {
-                DB::update('UPDATE tarefas SET titulo = :titulo WHERE id = :id', [
-                    'id' => $id,
-                    'titulo' => $request->input('titulo')
-                ]);
-            }
+        $request->validate([
+            'titulo' => [ 'required', 'string' ]
+        ]);
 
-            return redirect()->route('tarefas.list');
-        } else {
-            return redirect()
-                ->route('tarefas.edit', ['id' => $id])
-                ->with('warning', 'Você não preencheu o título');
-        }
+        DB::update('UPDATE tarefas SET titulo = :titulo WHERE id = :id', [
+            'id' => $id,
+            'titulo' => $request->input('titulo')
+        ]);
+        
+        return redirect()->route('tarefas.list');
     }
 
     public function del($id) {

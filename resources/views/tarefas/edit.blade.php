@@ -4,9 +4,18 @@
 @section('content')
     <h1>Edição de tarefas</h1>
 
-    @if (session('warning'))
+    {{-- Jeito 1 de fazer --}}
+    {{-- @if (session('warning'))
         <x-alert>
             {{ session('warning') }}
+        </x-alert>
+    @endif --}}
+
+    @if ($errors->any())
+        <x-alert>
+            @foreach ($errors->all() as $error)
+                {{ $error }} <br>
+            @endforeach
         </x-alert>
     @endif
 
