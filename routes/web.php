@@ -78,6 +78,21 @@ Route::prefix('/tarefas')->group(function() {
     Route::get('marcar/{id}', 'TarefasController@done')->name('tarefas.done'); //marcar resolvido ou não resolvido
 });
 
+/*
+    php artisan make:controller TodoController --resource
+    essa linha abaixo cria as rotas automaticamento
+
+    GET - /todo - index - todo.index
+    GET - todo/create - create - todo.create - FORM DE CRIAÇÃO
+    POST - /todo - store - todo.store - SALVA OS DADOS DE ADD
+    GET - /todo/{id} - show - todo.show - GET PARA TRAZER ITEM INDIVIDUAL
+    GET - /todo/{id}/edit - edit - todo.edit - FORM DE EDIÇÃO
+    PUT - /tudo/{id} - update - todo.update - RECEBE OS DADOS E DA UPDATE NO ITEM
+    DELETE - /todo/{id} - destroy - todo.destroy - DELETAR O ITEM
+
+*/
+Route::resource('todo', 'TodoController');
+
 Route::fallback(function() {
     return view('404');
 });
