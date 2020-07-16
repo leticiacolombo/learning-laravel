@@ -15,7 +15,11 @@ use Illuminate\Support\Facades\Route;
 
 // Diferentes formas de carregar uma view
 Route::get('/', 'HomeController');
-Route::view('/teste', 'teste');
+Route::view('/teste', 'teste')
+;
+Route::get('/login', function() {
+    echo 'pag de login';
+})->name('login');
 
 //Rotar com parâmetros
 Route::get('/noticia/{slug}', function($slug) {
@@ -57,7 +61,7 @@ Route::get('/user/{id}', function($id) {
 
 //Grupo de Rotas
 Route::prefix('/config')->group(function() {
-    Route::get('/', 'Admin\ConfigController@index');
+    Route::get('/', 'Admin\ConfigController@index')->middleware('auth');
     Route::post('/', 'Admin\ConfigController@index');
 
     Route::get('info', 'Admin\ConfigController@info');
@@ -89,7 +93,6 @@ Route::prefix('/tarefas')->group(function() {
     GET - /todo/{id}/edit - edit - todo.edit - FORM DE EDIÇÃO
     PUT - /tudo/{id} - update - todo.update - RECEBE OS DADOS E DA UPDATE NO ITEM
     DELETE - /todo/{id} - destroy - todo.destroy - DELETAR O ITEM
-
 */
 Route::resource('todo', 'TodoController');
 

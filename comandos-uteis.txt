@@ -2,3 +2,18 @@ php artisan serve
 das start no servidor
 
 php artisan make:controller ConfigController
+
+Middleware: pra que serve?
+
+Usuário requisita uma URL:::
+-> Laravel vai receber a requisição
+-> Rota, verifica a rota
+
+-> Middleware 
+roda antes de a requisição chegar no controller
+verifica se o usuário está logado, por exemplo.
+
+-> aplicação
+-> carrega view
+-> consulta o banco
+-> mostra os dados
