@@ -4,6 +4,8 @@
 @section('content')
 <h1>Configurações</h1>
 
+<a href="/logout">Sair</a>
+
 {{-- Forma normal de usar um componente criado --}}
 {{-- @component('alert')
     @slot('type')

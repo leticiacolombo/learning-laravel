@@ -17,3 +17,14 @@ verifica se o usuário está logado, por exemplo.
 -> carrega view
 -> consulta o banco
 -> mostra os dados
+
+/**********************************************/
+
+--- Autenticação ---
+
+Na versao atual do laravel nao vem o Auth
+
+Voce vai precisar rodar os comandos no bash
+
+composer require laravel/ui
+php artisan ui vue --auth

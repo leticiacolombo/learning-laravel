@@ -15,11 +15,15 @@ use Illuminate\Support\Facades\Route;
 
 // Diferentes formas de carregar uma view
 Route::get('/', 'HomeController');
-Route::view('/teste', 'teste')
-;
-Route::get('/login', function() {
-    echo 'pag de login';
-})->name('login');
+Route::view('/teste', 'teste');
+
+Route::get('/login', 'Auth\LoginController@index')->name('login');
+Route::post('/login', 'Auth\LoginController@authenticate');
+
+Route::get('/register', 'Auth\RegisterController@index')->name('register');
+Route::post('/register', 'Auth\RegisterController@register');
+
+Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
 
 //Rotar com parâmetros
 Route::get('/noticia/{slug}', function($slug) {
@@ -61,7 +65,7 @@ Route::get('/user/{id}', function($id) {
 
 //Grupo de Rotas
 Route::prefix('/config')->group(function() {
-    Route::get('/', 'Admin\ConfigController@index')->middleware('auth');
+    Route::get('/', 'Admin\ConfigController@index')->name('config.index')->middleware('auth');
     Route::post('/', 'Admin\ConfigController@index');
 
     Route::get('info', 'Admin\ConfigController@info');
@@ -99,3 +103,6 @@ Route::resource('todo', 'TodoController');
 Route::fallback(function() {
     return view('404');
 });
+//Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
