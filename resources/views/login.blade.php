@@ -16,7 +16,14 @@
         <br>
         <input type="password" name="password" placeholder="digite uma senha">
         <br>
-        <input type="submit" value="entrar">
+
+        @if ($tries >=3)
+            Você não pode tentar mais que 3 vezes.
+        @else
+            <input type="submit" value="entrar">
+        @endif
 
     </form>
+
+    Tentativas: {{ $tries }}
 @endsection

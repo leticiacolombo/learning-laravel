@@ -4,7 +4,7 @@
 @section('content')
 <h1>Configurações</h1>
 
-<a href="/logout">Sair</a>
+Olá, {{ $nome }} <a href="/logout">Sair</a>
 
 {{-- Forma normal de usar um componente criado --}}
 {{-- @component('alert')
@@ -72,6 +72,7 @@ Lista do bolo:
     @endforelse
 </ul>
 
+@if ($seeform)
 <form method="POST">
     @csrf <!-- Envia um _token junto com a requisição -->
 
@@ -85,4 +86,6 @@ Lista do bolo:
 </form>
 
 <a href="/config/info">Informações</a>
+@endif
+
 @endsection

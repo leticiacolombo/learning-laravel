@@ -4,10 +4,21 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class ConfigController extends Controller
 {
+    public function __construct() {
+        $this->middleware('auth');
+    }
+
     public function index(Request $request) {
+        //pega o usuário logado
+        $user = Auth::user();
+        //ou usando o request 
+        //$user = $request->user();
+
         echo "URL: ".$request->url();
         echo "Método: ".$request->method();
 
@@ -59,10 +70,11 @@ class ConfigController extends Controller
         ];
 
         $dados = [
-            'nome' => $request->input('nome', 'LETICIA'),
+            'nome' => $user->name,
             'idade' => $request->input('idade', '15'),
             'lista' => $lista,
-            'lista2' => []
+            'lista2' => [],
+            'seeform' => Gate::allows('see-form')
         ];
 
         //passando dados para a view
